@@ -15,6 +15,7 @@ class VoletFeedbackMessagesFilamentPluginServiceProvider extends PackageServiceP
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('volet-feedback-messages-filament-plugin');
+            ->name('volet-feedback-messages-filament-plugin')
+            ->hasViews();
     }
 }
