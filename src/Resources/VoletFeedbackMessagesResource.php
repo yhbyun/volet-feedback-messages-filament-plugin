@@ -21,7 +21,7 @@ class VoletFeedbackMessagesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
-    protected static ?string $modelLabel = 'Feedback Messages';
+    protected static ?string $modelLabel = '피드백';
 
     public static function form(Form $form): Form
     {
