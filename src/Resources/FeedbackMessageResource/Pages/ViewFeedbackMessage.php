@@ -15,11 +15,13 @@ class ViewFeedbackMessage extends ViewRecord
         return [
             Actions\EditAction::make(),
             Actions\Action::make('mark_as_read')
+                ->authorize('markAsRead')
                 ->label('Mark as Read')
                 ->icon('heroicon-m-eye')
                 ->action(fn () => $this->record->markAsRead())
                 ->visible(fn () => $this->record->status !== 'read'),
             Actions\Action::make('mark_as_resolved')
+                ->authorize('markAsResolved')
                 ->label('Mark as Resolved')
                 ->icon('heroicon-m-check')
                 ->action(fn () => $this->record->markAsResolved())

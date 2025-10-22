@@ -177,10 +177,12 @@ class VoletFeedbackMessagesResource extends Resource
                 ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Action::make('Mark As Read')
+                        ->authorize('markAsRead')
                         ->action(fn (FeedbackMessage $record) => $record->markAsRead())
                         ->icon('heroicon-m-eye')
                         ->visible(fn (FeedbackMessage $record) => $record->status !== 'read'),
                     Action::make('Mark As Resolved')
+                        ->authorize('markAsResolved')
                         ->action(fn (FeedbackMessage $record) => $record->markAsResolved())
                         ->icon('heroicon-m-check')
                         ->visible(fn (FeedbackMessage $record) => $record->status !== 'resolved'),
@@ -191,10 +193,12 @@ class VoletFeedbackMessagesResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\BulkAction::make('mark_as_read')
+                        ->authorize('markAnyAsRead')
                         ->label('Mark as Read')
                         ->icon('heroicon-m-eye')
                         ->action(fn ($records) => $records->each->markAsRead()),
                     Tables\Actions\BulkAction::make('mark_as_resolved')
+                        ->authorize('markAnyAsResolved')
                         ->label('Mark as Resolved')
                         ->icon('heroicon-m-check')
                         ->action(fn ($records) => $records->each->markAsResolved()),
