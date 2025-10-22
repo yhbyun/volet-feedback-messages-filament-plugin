@@ -2,18 +2,19 @@
 
 namespace Mydnic\VoletFeedbackMessagesFilamentPlugin\Resources;
 
+use App\Models\FeedbackMessage;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Filament\Infolists;
 use Mydnic\Volet\Features\FeatureManager;
-use Mydnic\Volet\Models\FeedbackMessage;
 use Mydnic\VoletFeedbackMessagesFilamentPlugin\Resources\FeedbackMessageResource\Pages;
+use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
 
 class VoletFeedbackMessagesResource extends Resource
 {
@@ -262,6 +263,8 @@ class VoletFeedbackMessagesResource extends Resource
                     ])
                     ->collapsible()
                     ->collapsed(),
+
+                CommentsEntry::make('filament_comments'),
             ]);
     }
 
