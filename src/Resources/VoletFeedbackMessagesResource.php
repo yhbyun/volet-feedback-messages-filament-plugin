@@ -22,6 +22,8 @@ class VoletFeedbackMessagesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
+    protected static ?int $navigationSort = 10;
+
     protected static ?string $modelLabel = '피드백';
 
     public static function form(Form $form): Form
@@ -91,9 +93,9 @@ class VoletFeedbackMessagesResource extends Resource
                             ->collapsible()
                             ->itemLabel(fn (array $state): ?string => $state['filename'] ?? 'Screenshot')
                             ->columnSpanFull()
-                            ->disabled() // Screenshots are read-only in admin
+                            ->disabled(), // Screenshots are read-only in admin
                     ])
-                    ->visible(fn ($record) => $record && !empty($record->screenshots)),
+                    ->visible(fn ($record) => $record && ! empty($record->screenshots)),
 
                 Forms\Components\Section::make('User Information')
                     ->schema([
@@ -128,13 +130,14 @@ class VoletFeedbackMessagesResource extends Resource
                         if (strlen($state) <= 50) {
                             return null;
                         }
+
                         return $state;
                     }),
                 Tables\Columns\IconColumn::make('has_screenshots')
                     ->label('Screenshots')
                     ->icon('heroicon-o-camera')
                     ->boolean()
-                    ->getStateUsing(fn ($record) => !empty($record->screenshots))
+                    ->getStateUsing(fn ($record) => ! empty($record->screenshots))
                     ->trueColor('success')
                     ->falseColor('gray'),
                 Tables\Columns\TextColumn::make('status')
@@ -252,13 +255,13 @@ class VoletFeedbackMessagesResource extends Resource
                                                 Infolists\Components\TextEntry::make('filename'),
                                                 Infolists\Components\TextEntry::make('type'),
                                                 Infolists\Components\TextEntry::make('size')
-                                                    ->formatStateUsing(fn ($state) => number_format($state) . ' bytes'),
+                                                    ->formatStateUsing(fn ($state) => number_format($state).' bytes'),
                                             ]),
                                     ]),
                             ])
                             ->columnSpanFull(),
                     ])
-                    ->visible(fn ($record) => !empty($record->screenshots)),
+                    ->visible(fn ($record) => ! empty($record->screenshots)),
 
                 Infolists\Components\Section::make('User Information')
                     ->schema([
