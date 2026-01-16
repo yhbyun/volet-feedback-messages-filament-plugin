@@ -24,7 +24,15 @@ class VoletFeedbackMessagesResource extends Resource
 
     protected static ?int $navigationSort = 10;
 
-    protected static ?string $modelLabel = '피드백';
+    public static function getNavigationLabel(): string
+    {
+        return static::getPluralModelLabel();
+    }
+
+    public static function getModelLabel(): string
+    {
+        return __('feedback.resource');
+    }
 
     public static function form(Form $form): Form
     {
